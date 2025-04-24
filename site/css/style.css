@@ -4462,7 +4462,9 @@ html [class*='section-'].section-bottom-0 {
 }
 
 .section-main-bunner .main-bunner-img {
+  background-image: url("../images/bg-bunner-2-mobile.jpeg");
   background-position: center;
+  background-size: cover;
   position: absolute;
   left: 0;
   right: 0;
@@ -4473,6 +4475,7 @@ html [class*='section-'].section-bottom-0 {
 
 @media (min-width: 1200px) {
   .section-main-bunner .main-bunner-img {
+    background-image: url("../images/bg-bunner-2.jpg");
     left: -100px;
     right: -100px;
     bottom: -100px;
@@ -4482,7 +4485,7 @@ html [class*='section-'].section-bottom-0 {
 }
 
 .section-main-bunner .main-bunner-inner {
-  min-height: 20vh;
+  min-height: 30vh;
   position: relative;
   flex: 1;
   z-index: 1;
