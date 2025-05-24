@@ -28,6 +28,39 @@
     html.lt-ie-10 .ie-panel {
       display: block;
     }
+
+    .about-us-banner {
+      aspect-ratio: 30/31;
+      background-attachment: fixed;
+      background-image: url(/images/NOSOTROS.jpg);
+    }
+
+    .parallax-content {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      padding: 0;
+    }
+
+    @media screen and (min-width: 768px) {
+      .about-us-banner {
+        aspect-ratio: unset;
+        background-image: url(images/bg-breadcrumbs-about.jpg);
+      }
+
+      .parallax-content {
+        display: block;
+        height: auto;
+        padding: 140px 0 120px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .parallax-content {
+        padding-top: 260px;
+        padding-bottom: 180px;
+      }
+    }
   </style>
 </head>
 
@@ -71,8 +104,8 @@
                   <ul class="rd-navbar-nav">
                     <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">Inicio</a></li>
                     <li class="rd-nav-item active"><a class="rd-nav-link" href="about-us.html"> Nosotros</a></li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="typography.html">Compra Tokens</a></li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="contacts.html">Contactos</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="buy.html">Compra Tokens</a></li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">Contactos</a></li>
                   </ul><a class="button button-primary button-sm" href="#">Comprar</a>
                 </div>
               </div><a class="button button-primary button-sm" href="#">Comprar</a>
@@ -81,12 +114,13 @@
         </nav>
       </div>
     </header>
-    <section class="parallax-container" data-parallax-img="images/bg-breadcrumbs-about.jpg">
+
+    <section class="about-us-banner">
       <div class="parallax-content breadcrumbs-custom context-dark">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-12 col-lg-9">
-              <h2 class="breadcrumbs-custom-title"> Dubai  -  Kampala</h2>
+              <h2 class="breadcrumbs-custom-title"> Dubai - Kampala</h2>
               <ul class="breadcrumbs-custom-path">
                 <li><a href="index.html">Inicio</a></li>
                 <li class="active"> Nosotros</li>
@@ -98,7 +132,7 @@
     </section>
 
     <!-- NUEVA SECCIÓN SOBRE NOSOTROS -->
-    <section class="section section-lg bg-gray-1 bg-gray-1-decor">
+    <section class="section section-lg bg-gray-1">
       <div class="container">
         <div class="row row-50">
           <div class="col-lg-6 pr-xl-5">
@@ -223,8 +257,8 @@
                 <ul class="nav-list">
                   <li><a href="index.html">Inicio</a></li>
                   <li><a href="about-us.html">Nosotros</a></li>
-                  <li><a href="typography.html">Compra Tokens</a></li>
-                  <li><a href="contacts.html">Contactos</a></li>
+                  <li><a href="buy.html">Compra Tokens</a></li>
+                  <li><a href="contact-us.html">Contactos</a></li>
                 </ul>
               </div>
               <div class="col-md-4">
