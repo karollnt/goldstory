@@ -6898,3 +6898,19 @@ html.rd-navbar-fixed-linked .page {
 html:not(.ie-11):not(.ios) .parallax-disabled {
   background-attachment: fixed;
 }
+
+.list-disc {
+  list-style: disc inside;
+}
+
+.list-disc li {
+  display: list-item;
+}
+
+.list-disc li + li {
+  margin-top: 1rem;
+}
+
+.text-lg {
+  font-size: 18px;
+}
