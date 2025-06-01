@@ -2,7 +2,7 @@
 <html class="wide wow-animation" lang="es">
 
 <head>
-  <title>Términos y Condiciones</title>
+  <title>Sobre Nosotros</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,72 +12,310 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <link rel="stylesheet" href="css/fonts.css">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .ie-panel {
+      display: none;
+      background: #212121;
+      padding: 10px 0;
+      box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, .3);
+      clear: both;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    html.ie-10 .ie-panel,
+    html.lt-ie-10 .ie-panel {
+      display: block;
+    }
+
+    .about-us-banner {
+      aspect-ratio: 30/31;
+      background-attachment: fixed;
+      background-image: url(images/NOSOTROS.jpg);
+      background-position-y: -60%;
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+    .parallax-content {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      padding: 0;
+    }
+
+    @media screen and (min-width: 768px) {
+      .about-us-banner {
+        aspect-ratio: unset;
+        background-image: url(images/bg-breadcrumbs-about.jpg);
+        background-position-x: 0;
+        background-position-y: 0;
+        background-size: auto;
+      }
+
+      .parallax-content {
+        display: block;
+        height: auto;
+        padding: 140px 0 120px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .parallax-content {
+        padding-top: 260px;
+        padding-bottom: 180px;
+      }
+    }
+  </style>
 </head>
 
 <body>
+  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img
+        src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820"
+        alt="Está usando un navegador desactualizado. Para una experiencia más rápida y segura, actualice gratis hoy."></a>
+  </div>
+  <div class="preloader">
+    <div class="preloader-body">
+      <div class="cssload-container">
+        <div class="cssload-speeding-wheel"></div>
+      </div>
+      <p>Cargando...</p>
+    </div>
+  </div>
   <div class="page">
+    <!-- Page Header-->
     <header class="section page-header">
+      <!-- RD Navbar-->
       <div class="rd-navbar-wrap">
-        <nav class="rd-navbar rd-navbar-classic">
+        <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed"
+          data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static"
+          data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static"
+          data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static"
+          data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px"
+          data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
           <div class="rd-navbar-main-outer">
             <div class="rd-navbar-main">
+              <!-- RD Navbar Panel-->
               <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                <!-- RD Navbar Brand-->
                 <div class="rd-navbar-brand"><a href="index.html"><img class="brand-logo-light"
                       src="images/logo-inverse-415x103.png" alt="" width="207" height="51" /></a></div>
               </div>
               <div class="rd-navbar-main-element">
                 <div class="rd-navbar-nav-wrap">
+                  <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
                     <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">Inicio</a></li>
-                    <li class="rd-nav-item"><a class="rd-nav-link" href="about-us.html">Nosotros</a></li>
+                    <li class="rd-nav-item active"><a class="rd-nav-link" href="about-us.html"> Nosotros</a></li>
                     <li class="rd-nav-item"><a class="rd-nav-link" href="buy.html">Compra Tokens</a></li>
-                    <li class="rd-nav-item active"><a class="rd-nav-link" href="#">Términos</a></li>
-                  </ul>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">Contactos</a></li>
+                  </ul><a class="button button-primary button-sm" href="buymeta.html">Comprar</a>
                 </div>
-              </div>
+              </div><a class="button button-primary button-sm" href="buymeta.html">Comprar</a>
             </div>
           </div>
         </nav>
       </div>
     </header>
 
-    <section class="section section-lg bg-light text-center">
-      <div class="container">
-        <h2 class="text-primary mb-4">Términos y Condiciones</h2>
-        <p class="lead">Actualizado el: [fecha actual]</p>
-        <div class="text-left mt-4">
-          <p><strong>1. Naturaleza del Token</strong><br>
-            GS Token es un activo digital simbólico para financiar el proyecto GoldStory. No representa un valor financiero, ni otorga derechos de propiedad ni garantía de retorno.</p>
-
-          <p><strong>2. Uso de Fondos</strong><br>
-            Los fondos se usarán exclusivamente para el comercio de oro, divididos en dos fases:
-            <ul>
-              <li>Fase 1: $125,000 USD para compra inicial, transporte y logística.</li>
-              <li>Fase 2: $250,000 USD para completar la operación y distribución simbólica.</li>
-            </ul>
-          </p>
-
-          <p><strong>3. Transparencia</strong><br>
-            Toda transacción es visible en Polygon. Un panel permitirá seguimiento en tiempo real de wallets, progreso y uso de fondos.</p>
-
-          <p><strong>4. Riesgos</strong><br>
-            El usuario reconoce que su participación es voluntaria y sin garantías. El proyecto puede verse afectado por condiciones externas.</p>
-
-          <p><strong>5. Responsabilidad</strong><br>
-            El equipo actuará con transparencia, pero no es responsable por pérdidas derivadas del mercado, logística o cambios regulatorios.</p>
-
-          <p><strong>6. Política de Reembolso</strong><br>
-            No se ofrecen reembolsos automáticos, ya que los fondos se utilizan para una operación real en curso.</p>
-
-          <p><strong>7. Modificaciones</strong><br>
-            Estos términos pueden actualizarse. Revisa la versión vigente en: <a href="https://www.goldstory.site">www.goldstory.site</a></p>
-
-          <p><strong>8. Contacto</strong><br>
-            Para dudas: <a href="mailto:info@goldstory.site">info@goldstory.site</a></p>
+    <section class="about-us-banner">
+      <div class="parallax-content breadcrumbs-custom context-dark">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9">
+              <h2 class="breadcrumbs-custom-title"> Dubai - Kampala</h2>
+              <ul class="breadcrumbs-custom-path">
+                <li><a href="index.html">Inicio</a></li>
+                <li class="active"> Nosotros</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
     </section>
+
+    <!-- NUEVA SECCIÓN SOBRE NOSOTROS -->
+    <section class="section section-lg bg-gray-1">
+      <div class="container">
+        <div class="row row-50">
+          <div class="col-lg-6 pr-xl-5">
+            <img src="images/gold.jpg" alt="Imagen sobre nosotros" width="518" height="430" />
+          </div>
+          <div class="col-lg-6">
+            <h3>Sobre GoldStory</h3>
+            <div class="text-with-divider">
+              <div class="divider"></div>
+              <h4 class="text-opacity-70">Transformamos historias en oportunidades reales.</h4>
+            </div>
+            <p>GoldStory es una iniciativa que une la empatía con la acción concreta. A través de nuestro token GS, los
+              usuarios pueden apoyar historias de vida reales y, al mismo tiempo, participar simbólicamente en un
+              proyecto de comercio internacional de oro.</p>
+            <p>Al donar, no solo estás ayudando a personas a compartir su historia y salir adelante, sino que también
+              estás respaldando un modelo económico sustentado por la compra y venta de oro con retornos estimados. Una
+              parte de las utilidades vuelve a los contribuyentes en proporción a su participación en el token.</p>
+            <p>Desde África hasta Dubái, nuestro modelo busca generar impacto social y rentabilidad real. Creemos en la
+              transparencia, el empoderamiento y el valor compartido.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN SOBRE NOSOTROS COMPLETA -->
+    <section class="section section-lg bg-light text-center py-5">
+      <div class="container">
+        <div class="row justify-content-center mb-4">
+          <div class="col-lg-10 col-xl-8">
+            <h2 class="text-primary mb-4">Sobre Nosotros</h2>
+            <h4 class="text-dark mb-3">¿Quiénes somos?</h4>
+            <p class="lead">En <strong>GoldStory</strong> creemos en unir la inversión inteligente con el impacto
+              positivo. Somos un equipo multidisciplinario comprometido con transformar la forma en que las personas
+              apoyan causas sociales y al mismo tiempo acceden a oportunidades reales de participación en negocios
+              rentables.</p>
+
+            <h4 class="text-dark mt-5 mb-3">¿Qué hacemos?</h4>
+            <p class="lead">Creamos un ecosistema donde cualquier persona puede apoyar historias humanas inspiradoras
+              —niños, familias o comunidades con necesidades específicas— y al mismo tiempo recibir tokens que
+              representan una participación simbólica en un negocio de compraventa de oro con operaciones entre África y
+              Dubái.</p>
+
+            <h4 class="text-dark mt-5 mb-3">Nuestra visión</h4>
+            <p class="lead">Construir un puente entre la solidaridad y la rentabilidad, donde donar no solo significa
+              ayudar, sino también ser parte de un proyecto económico real, transparente y sostenible.</p>
+
+            <h4 class="text-dark mt-5 mb-3">Nuestra misión</h4>
+            <p class="lead">Facilitar el acceso a oportunidades financieras basadas en activos sólidos como el oro,
+              mientras promovemos una cultura de empatía y colaboración global, usando la tecnología blockchain como
+              base de confianza.</p>
+
+            <h4 class="text-dark mt-5 mb-3">¿Por qué GoldStory?</h4>
+            <ul class="list-unstyled lead">
+              <li>Proyecto real respaldado por comercio de oro.</li>
+              <li>Participación comunitaria con tokens (GS).</li>
+              <li>Rentabilidad estimada del 24% sobre inversión.</li>
+              <li>Ayuda directa a personas con historias auténticas.</li>
+            </ul>
+  <h4 class="text-dark mt-5 mb-3"> Transparencia y uso de fondos: </h4>
+  <ul class="list-unstyled lead">
+<li>GoldStory Token (GS) es un token simbólico creado con el único propósito de financiar el proyecto de comercio de oro entre Kampala (Uganda) y Dubái.</li>
+  <h3 class="text-dark mt-5 mb-3"> La recaudación se dividirá en dos etapas::</h3>  
+<h3 class="text-dark mt-5 mb-3">Etapa 1:</h3>  <li>Una vez se recauden $125,000 USD, estos serán retirados por el equipo fundador para ejecutar la primera fase de compra y logística del oro.</li>
+
+<h3 class="text-dark mt-5 mb-3">Etapa 2:</h3> <li>Al alcanzar el total de $250,000 USD, se retirará el resto de los fondos para completar la operación y distribución correspondiente.</li>
+
+   <li> La comunidad podrá monitorear en tiempo real el progreso de la recaudación mediante un panel público conectado a la red Polygon.
+    GoldStory NO constituye una inversión financiera ni promete retorno garantizado. 
+    Todos los participantes aceptan que su contribución es voluntaria y destinada al desarrollo del proyecto de forma transparente y trazable.</li>
+
+</ul>
+
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+    <section class="section section-lg bg-default">
+      <div class="container">
+        <h3 class="text-center">Nuestra Misión</h3>
+        <div class="row row-30 row-md-40 row-xl-60">
+          <div class="col-md-6 col-lg-4">
+            <div class="box-icon-modern">
+              <div class="box-icon-inner decorate-triangle"><span
+                  class="icon-xl linearicons-rocket icon-primary"></span>
+              </div>
+              <div class="box-icon-caption">
+                <h4><a href="#">Impulsar Historias</a></h4>
+                <p>Damos visibilidad a historias reales que merecen una oportunidad y un nuevo comienzo.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="box-icon-modern">
+              <div class="box-icon-inner decorate-circle"><span class="icon-xl linearicons-diamond icon-primary"></span>
+              </div>
+              <div class="box-icon-caption">
+                <h4><a href="#">Transparencia y Valor</a></h4>
+                <p>Cada contribución es trazable y respaldada por activos reales: oro físico comercializado.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="box-icon-modern">
+              <div class="box-icon-inner decorate-rectangle"><span
+                  class="icon-xl linearicons-pie-chart icon-primary"></span></div>
+              <div class="box-icon-caption">
+                <h4><a href="#">Crear Impacto</a></h4>
+                <p>Buscamos resultados: vidas transformadas, economía social activa y retorno para los donantes.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer-->
+    <footer class="section footer-classic context-dark">
+      <div class="container">
+        <div class="row row-30">
+          <div class="col-md-4 col-xl-5">
+            <div class="pr-xl-4">
+              <a class="brand" href="index.html"><img class="brand-logo-light" src="images/logo-inverse-415x103.png"
+                  alt="" width="207" height="51" /></a>
+              <p>GoldStory: Apoya historias, genera valor.</p>
+              <p class="rights"><span>© </span><span class="copyright-year"></span><span> GoldStory.</span><span> Todos
+                  los derechos reservados.</span></p>
+            </div>
+          </div>
+          <div class="col-md-8 col-xl-7">
+            <div class="row row-30">
+              <div class="col-md-4">
+                <h5>Enlaces Rápidos</h5>
+                <ul class="nav-list">
+                  <li><a href="index.html">Inicio</a></li>
+                  <li><a href="about-us.html">Nosotros</a></li>
+                  <li><a href="buy.html">Compra Tokens</a></li>
+                  <li><a href="contact-us.html">Contactos</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h5>Información</h5>
+                <dl class="contact-list">
+                  <dt>Dirección:</dt>
+                  <dd>carrera 44#84-126</dd>
+                </dl>
+                <dl class="contact-list">
+                  <dt>Correo Electrónico:</dt>
+                  <dd><a href="mailto:#">info@goldstory.com</a></dd>
+                </dl>
+                <dl class="contact-list">
+                  <dt>Teléfono:</dt>
+                  <dd>3225921707</dd>
+                </dl>
+              </div>
+              <div class="col-md-4">
+                <h5>Síguenos</h5>
+                <ul class="list-inline list-social list-social-white">
+            <!--      <li><a class="icon mdi mdi-facebook" href="#"></a></li> -->
+                  <li><a class="icon mdi mdi-twitter" href="https://x.com/GoldStoryToken"></a></li>
+                  <li><a class="icon mdi mdi-instagram" href="https://www.instagram.com/goldstorytoken/"></a></li>
+                  <li><a class="icon mdi mdi-youtube"  href="https://www.facebook.com/karitomostra"></a></li>
+                <!--     <li><a class="icon mdi mdi-google-plus" href="#"></a></li>  -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
+  <a href="buymeta.html" class="ui-to-top ui-to-top--buy active">Comprar</a>
+  <script src="js/core.min.js"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>
