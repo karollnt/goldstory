@@ -47,7 +47,7 @@
 
     @media screen and (min-width: 768px) {
       .buy-token-banner {
-        aspect-ratio: 2;
+        aspect-ratio: 3/2;
         background-image: url(images/COMPRA.jpg);
         background-position-y: unset;
         background-size: auto;
@@ -63,6 +63,13 @@
       .parallax-content {
         padding-top: 260px;
         padding-bottom: 180px;
+      }
+    }
+
+    @media screen and (min-width: 1400px) {
+      .buy-token-banner {
+        aspect-ratio: 2;
+        background-size: cover;
       }
     }
   </style>
@@ -114,9 +121,12 @@
                     </li>
                     <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">Contactenos</a>
                     </li>
-                  </ul><a class="button button-primary button-sm" href="buymeta.html">Comprar</a>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="progress.html">Progreso</a></li>
+                  </ul>
+                  <a class="button button-primary button-sm" href="buymeta.html">Comprar</a>
                 </div>
-              </div><a class="button button-primary button-sm" href="buymeta.html">Comprar</a>
+              </div>
+              <a class="button button-primary button-sm" href="buymeta.html">Comprar</a>
             </div>
           </div>
         </nav>
@@ -409,11 +419,6 @@
         </div>
       </div>
     </footer>
-  </div>
-  <a href="buymeta.html" class="ui-to-top ui-to-top--buy active">Comprar</a>
-  <script src="js/core.min.js"></script>
-  <script src="js/script.js"></script>
-
   </div>
   <a href="buymeta.html" class="ui-to-top ui-to-top--buy active">Comprar</a>
   <div class="snackbars" id="form-output-global"></div>

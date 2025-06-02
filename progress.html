@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html class="wide wow-animation" lang="es">
+<html class="wide wow-animation" lang="en">
 
 <head>
-  <title>Sobre Nosotros</title>
+  <title>Progreso</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,13 +29,12 @@
       display: block;
     }
 
-    .about-us-banner {
-      aspect-ratio: 30/31;
+    .contact-us {
+      aspect-ratio: 15/17;
       background-attachment: fixed;
-      background-image: url(images/tc.png);
-      background-position-y: -60%;
+      background-image: url(images/contactanos-mobile.jpg);
+      background-position-y: 40px;
       background-repeat: no-repeat;
-      background-size: contain;
     }
 
     .parallax-content {
@@ -46,17 +45,14 @@
     }
 
     @media screen and (min-width: 768px) {
-      .about-us-banner {
-        aspect-ratio: unset;
-        background-image: url(images/terminoscon.png);
-        background-position-x: 0;
-        background-position-y: 0;
-        background-size: auto;
+      .contact-us {
+        aspect-ratio: 3/2;
+        background-position-y: unset;
+        background-image: url(images/contactanos.jpg);
       }
 
       .parallax-content {
         display: block;
-        height: auto;
         padding: 140px 0 120px;
       }
     }
@@ -67,20 +63,28 @@
         padding-bottom: 180px;
       }
     }
+
+    @media screen and (min-width: 1400px) {
+      .contact-us {
+        aspect-ratio: 2.6;
+        background-position: center;
+        background-size: cover;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img
         src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820"
-        alt="Está usando un navegador desactualizado. Para una experiencia más rápida y segura, actualice gratis hoy."></a>
+        alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a>
   </div>
   <div class="preloader">
     <div class="preloader-body">
       <div class="cssload-container">
         <div class="cssload-speeding-wheel"></div>
       </div>
-      <p>Cargando...</p>
+      <p>Loading...</p>
     </div>
   </div>
   <div class="page">
@@ -123,68 +127,51 @@
       </div>
     </header>
 
-    <section class="about-us-banner">
+    <section class="contact-us">
       <div class="parallax-content breadcrumbs-custom context-dark">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-12 col-lg-9">
-           <!--    <h2 class="breadcrumbs-custom-title"> Terminos - Condiciones</h2> -->
-              <ul class="breadcrumbs-custom-path">
-                <li><a href="index.html">Inicio</a></li>
-                <li class="active"> Nosotros</li>
-              </ul>
+              <h2 class="breadcrumbs-custom-title">Progreso</h2>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- NUEVA SECCIÓN SOBRE NOSOTROS -->
-    <section class="section section-lg bg-gray-1">
+    <section class="section section-lg">
       <div class="container">
-        <div class="row row-50">
-          <div class="col-lg-6 pr-xl-5">
-            <img src="images/ter.jpg" alt="Imagen sobre nosotros" width="518" height="430" />
+        <h3 class="text-center">Datos de recaudo</h3>
+        <div class="row justify-content-center text-center">
+          <div class="col-md-5">
+            <p><a href="https://app.uniswap.org/positions/v3/polygon/2549109" target="_blank">Ver en Uniswap</a></p>
           </div>
-          <div class="col-lg-6">
-            <section class="section section-lg bg-light text-center">
-      <div class="container">
-        <h2 class="text-primary mb-4">Términos y Condiciones</h2>
-        <p class="lead">Actualizado el: 1 JUNIO DEL 2025</p>
-        <div class="text-left mt-4">
-          <p><strong>1. Naturaleza del Token</strong><br>
-            GS Token es un activo digital simbólico para financiar el proyecto GoldStory. No representa un valor financiero, ni otorga derechos de propiedad ni garantía de retorno.</p>
-
-          <p><strong>2. Uso de Fondos</strong><br>
-            Los fondos se usarán exclusivamente para el comercio de oro, divididos en dos fases:
-            <ul>
-              <li>Fase 1: $125,000 USD para compra inicial, transporte y logística.</li>
-              <li>Fase 2: $250,000 USD para completar la operación y distribución simbólica.</li>
-            </ul>
-          </p>
-
-          <p><strong>3. Transparencia</strong><br>
-            Toda transacción es visible en Polygon. Un panel permitirá seguimiento en tiempo real de wallets, progreso y uso de fondos.</p>
-
-          <p><strong>4. Riesgos</strong><br>
-            El usuario reconoce que su participación es voluntaria y sin garantías. El proyecto puede verse afectado por condiciones externas.</p>
-
-          <p><strong>5. Responsabilidad</strong><br>
-            El equipo actuará con transparencia, pero no es responsable por pérdidas derivadas del mercado, logística o cambios regulatorios.</p>
-
-          <p><strong>6. Política de Reembolso</strong><br>
-            No se ofrecen reembolsos automáticos, ya que los fondos se utilizan para una operación real en curso.</p>
-
-          <p><strong>7. Modificaciones</strong><br>
-            Estos términos pueden actualizarse. Revisa la versión vigente en: <a href="https://www.goldstory.site">www.goldstory.site</a></p>
-
-          <p><strong>8. Contacto</strong><br>
-            Para dudas: <a href="mailto:info@goldstory.site">info@goldstory.site</a></p>
+          <div class="col-md-5">
+            <p><a href="https://polygonscan.com/token/0x9c2cd31784ffd13350058ac199f884bb166ce41c" target="_blank">Ver en polygonscan</a></p>
+          </div>
         </div>
+        <div class="table-custom-responsive">
+          <table class="table-custom table-striped table-bordered">
+            <thead>
+              <tr>
+                <th class="text-center">Cantidad de Tokens</th>
+                <th class="text-center">Precio por Token (USD)</th>
+                <th class="text-center">Valor Total (USD)</th>
+              </tr>
+            </thead>
+            <tbody id="token-data">
+              <tr>
+                <td class="text-center"><span class="js-token-supply"></span> GS</td>
+                <td class="text-center js-token-price-usd"></span></td>
+                <td class="text-center js-token-supply-usd"></td>
+            </tbody>
+          </table>
+        </div>
+
+        <img src="images/gs-market-progress.jpg" alt="" loading="lazy" class="img-responsive center-block mt-5" style="max-width: 100%; height: auto;">
       </div>
     </section>
-            
-  <!-- Footer-->
+
     <footer class="section footer-classic context-dark">
       <div class="container">
         <div class="row row-30">
@@ -239,12 +226,13 @@
         </div>
       </div>
     </footer>
- 
-
   </div>
   <a href="buymeta.html" class="ui-to-top ui-to-top--buy active">Comprar</a>
+  <div class="snackbars" id="form-output-global"></div>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.8.1/dist/ethers.umd.min.js"></script>
   <script src="js/core.min.js"></script>
   <script src="js/script.js"></script>
+  <script src="components/TokenSupply.js"></script>
 </body>
 
 </html>
