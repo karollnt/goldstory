@@ -47,13 +47,11 @@ async function displayTokenSupply() {
     ]);
     const formatted = ethers.formatUnits(rawSupply, decimals);
 
-    let priceUSD = await fetchTokenPriceUSD();
-    let priceSource = "GeckoTerminal";
+    const priceUSD = await fetchTokenPriceUSD();
 
-    document.querySelector(".js-token-supply").textContent = new Intl.NumberFormat().format(formatted);
     if (priceUSD !== null) {
       const totalUSD = (parseFloat(formatted) * priceUSD).toLocaleString(undefined, { style: "currency", currency: "USD" });
-      document.querySelector(".js-token-supply-usd").textContent = `${totalUSD} (${priceSource})`;
+      document.querySelector(".js-token-supply-usd").textContent = totalUSD;
       document.querySelector(".js-token-price-usd").textContent = priceUSD.toLocaleString(undefined, { style: "currency", currency: "USD" });
     } else {
       document.querySelector(".js-token-supply-usd").textContent = "Not listed on GeckoTerminal";
@@ -61,7 +59,6 @@ async function displayTokenSupply() {
     }
   } catch (err) {
     console.error("Error fetching token supply or price:", err);
-    document.querySelector(".js-token-supply").textContent = "Error fetching supply";
     document.querySelector(".js-token-supply-usd").textContent = "Error";
     document.querySelector(".js-token-price-usd").textContent = "Error";
   }
