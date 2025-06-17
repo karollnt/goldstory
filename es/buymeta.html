@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="es">
+
+<head>
+  <title>Compra tu token</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="images/favicon.png" type="image/x-icon">
+  <link rel="stylesheet" type="text/css"
+    href="//fonts.googleapis.com/css?family=Poppins:300,300i,400,500,600,700,800,900,900i%7CRoboto:400%7CRubik:100,400,700">
+  <link rel="stylesheet" href="../css/bootstrap.css">
+  <link rel="stylesheet" href="../css/fonts.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .ie-panel {
+      display: none;
+      background: #212121;
+      padding: 10px 0;
+      box-shadow: 3px 3px 5px 0 rgba(0, 0, 0, .3);
+      clear: both;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    html.ie-10 .ie-panel,
+    html.lt-ie-10 .ie-panel {
+      display: block;
+    }
+
+    .buy-token-banner {
+      aspect-ratio: 15/17;
+      background-attachment: fixed;
+      background-image: url(images/token2.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+    }
+
+
+    .parallax-content {
+      align-items: center;
+      display: flex;
+      height: 100%;
+      padding: 0;
+    }
+
+    @media screen and (min-width: 1200px) {
+      .buy-token-banner {
+        aspect-ratio: 3/2;
+        background-attachment: unset;
+        background-position-y: unset;
+        background-image: url(images/token.png);
+        background-size: 100%;
+      }
+
+      .parallax-content {
+        display: block;
+        padding: 140px 0 120px;
+      }
+    }
+
+    @media (min-width: 1200px) {
+      .parallax-content {
+        padding-top: 260px;
+        padding-bottom: 180px;
+      }
+    }
+
+    @media screen and (min-width: 1400px) {
+      .buy-token-banner {
+        aspect-ratio: 1.6;
+        background-size: cover;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="ie-panel"><a href="http://windows.microsoft.com/en-US/internet-explorer/"><img
+        src="images/ie8-panel/warning_bar_0000_us.jpg" height="42" width="820"
+        alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today."></a>
+  </div>
+  <div class="preloader">
+    <div class="preloader-body">
+      <div class="cssload-container">
+        <div class="cssload-speeding-wheel"></div>
+      </div>
+      <p>Loading...</p>
+    </div>
+  </div>
+  <div class="page">
+    <!-- Page Header     aspect-ratio: 15/17;
+      background-attachment: fixed; background-position-y: 40px;
+      background-repeat: no-repeat; 
+      background-size: contain; -->
+    <header class="section page-header">
+      <!-- RD Navbar-->
+      <div class="rd-navbar-wrap">
+        <nav class="rd-navbar rd-navbar-classic" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed"
+          data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static"
+          data-lg-device-layout="rd-navbar-static" data-xl-layout="rd-navbar-static"
+          data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static"
+          data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="46px" data-xl-stick-up-offset="46px"
+          data-xxl-stick-up-offset="46px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+          <div class="rd-navbar-main-outer">
+            <div class="rd-navbar-main">
+              <!-- RD Navbar Panel-->
+              <div class="rd-navbar-panel">
+                <!-- RD Navbar Toggle-->
+                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                <!-- RD Navbar Brand-->
+                <div class="rd-navbar-brand"><a href="index.html"><img class="brand-logo-light"
+                      src="images/logo-inverse-415x103.png" alt="" width="207" height="51" /></a></div>
+              </div>
+              <div class="rd-navbar-main-element">
+                <div class="rd-navbar-nav-wrap">
+                  <!-- RD Navbar Nav-->
+                  <ul class="rd-navbar-nav">
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="about-us.html">Nosotros</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="buy.html">Compra Tokens</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="contact-us.html">Contactenos</a>
+                    </li>
+                    <li class="rd-nav-item"><a class="rd-nav-link" href="progress.html">Progreso</a></li>
+                  </ul>
+                  <a class="button button-primary button-sm" href="buymeta.html">Comprar</a>
+                </div>
+              </div>
+              <a class="button button-primary button-sm" href="buymeta.html">Comprar</a>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+    <section class="buy-token-banner">
+      <div class="parallax-content breadcrumbs-custom context-dark">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-12 col-lg-9">
+              <h2 class="breadcrumbs-custom-title"></h2>
+              <ul class="breadcrumbs-custom-path">
+                <!--    <li><a href="index.html">Inicio</a></li>
+                <li class="active">Typography</li>  -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Base typography -->
+    <section class="section section-lg bg-default">
+      <div class="container">
+        <div class="row row-50 flex-lg-row-reverse justify-content-xl-between">
+          <!--<div class="col-xl-4">
+            <div class="block-bordered-left">
+              <div class="row row-40">
+                <div class="col-sm-6 col-xl-12">
+                  <h5 class="thin-title">Fonts</h5>
+                  <h2 class="heading-font text-accent-3">henric</h2>
+                  <h3 class="heading-font">Poppins</h3>
+                  <h2 class="heading-font text-accent-2">Tuesday </h2>
+                </div>
+                <div class="col-sm-6 col-xl-12">
+                        <h5 class="thin-title">Colors</h5>
+                  <ul class="list-color">
+                    <li>
+                      <div class="box-color bg-primary"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-pink"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-secondary"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-green"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-secondary-2"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-gray-800"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-gray-400"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-gray-300"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-gray-600"></div>
+                    </li>
+                    <li>
+                      <div class="box-color bg-gray-700"></div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-7"> -->
+          <section id="como-comprar" class="section section-lg bg-light">
+            <div class="container">
+              <h2 class="text-center text-gold-600 font-bold mb-5"> Cómo Comprar el Token GoldStory (GS)</h2>
+              <p class="text-center mb-4 text-lg"> ¿Nunca has comprado criptomonedas? No te preocupes, te guiamos
+                paso a
+                paso.</p>
+
+              <div class="option mb-5">
+                <h3 class="text-xl font-semibold text-orange-600 mb-3"> OPCIÓN 1: Desde CERO usando pesos
+                  colombianos (COP)</h3>
+                <p class="mb-4 text-lg"><strong>💡 Ideal si no tienes criptomonedas aún.</strong></p>
+
+                <ul class="list-disc list-inside text-gray-700 space-y-3 text-lg">
+                  <li>
+                    <strong>Paso 1: Instala Uniswap</strong><br>
+                    Uniswap es tu billetera cripto. Desde ahí guardarás tus GS.<br>
+                    <a href="https://metamask.io/download.html" target="_blank" class="text-blue-600 underline">🔗
+                      Descargar Uniswap (Chrome / iOS / Android)</a><br>
+                    <a href="guiauniswap.pdf" target="_blank" class="text-blue-600 underline">📘 Guía PDF - Cómo
+                      instalar y configurar Uniswap</a>
+                  </li>
+                  <li>
+                    <strong>Paso 2: Compra MATIC y USDC para la red polygon desde Colombia con Wenia</strong><br>
+                    Wenia es una plataforma colombiana donde puedes pagar en pesos (PSE, Nequi, etc.) y recibir
+                    MATIC y USDC directamente en tu Uniswap.<br>
+                    <a href="https://wenia.com" target="_blank" class="text-blue-600 underline">🔗 Ir a
+                      Wenia.com</a><br>
+                    <a href="https://www.wenia.com/es/recursos/tutoriales/comprar-copw-con-cuenta-bancolombia"
+                      target="_blank" class="text-blue-600 underline">📘 Guía PDF - Comprar cripto con pesos y
+                      enviarlo a Uniswap</a>
+                  </li>
+                  <li>
+                    <strong>Paso 3: Envia a tu wallet Uniswap los MATIC y USDC </strong><br>
+                    Ya con fondos en tu Uniswap (en la red Polygon), entra aquí para hacer el intercambio:<br>
+                    <a href="https://app.uniswap.org/explore/tokens/polygon/0x9c2cd31784ffd13350058ac199f884bb166ce41c?utm_medium=mobile&utm_source=share-tdp"
+                      target="_blank" class="text-blue-600 underline">🔁 Comprar Token GS en UNISWAP</a><br>
+                    <a href="guiaQuick.pdf" target="_blank" class="text-blue-600 underline">📘 Guía PDF - Cómo
+                      intercambiar USDC por GS</a>
+                  </li>
+                  <li>
+                    <strong>Paso 4: Agrega el token GS a MetaMask</strong><br>
+                    Datos del Token GoldStory:<br>
+                    Dirección: <code>0x9c2Cd31784ffD13350058Ac199f884bb166cE41C</code><br>
+                    Símbolo: GS<br>
+                    Decimales: 18<br>
+                    <a href="XXXXXXXX" target="_blank" class="text-blue-600 underline">📘 Guía
+                      PDF - Cómo agregar tu token GS a UNISWAP</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="option mb-5">
+                <h3 class="text-xl font-semibold text-purple-600 mb-3"> OPCIÓN 2: ¿Ya tienes USDC en Binance?</h3>
+                <p class="text-lg"><strong>Si ya manejas criptomonedas, este es tu camino.</strong></p>
+
+                <ul class="list-disc list-inside text-gray-700 space-y-3 mt-3 text-lg">
+                  <li>
+                    <strong>Paso 1: Copia tu dirección de UNISWAP (red Polygon)</strong><br>
+                    Abre UNISWAP.<br>
+                    Asegúrate de estar en la red Polygon.<br>
+                    Copia tu dirección que empieza por 0x....
+                  </li>
+                  <li>
+                    <strong>Paso 2: Envíalo desde Binance</strong><br>
+                    En Binance, ve a "Retirar".<br>
+                    Selecciona USDC.<br>
+                    Pega tu dirección de UNISWAP.<br>
+                    Selecciona la red Polygon (MATIC).<br>
+                    Confirma.<br>
+                    <a href="enviar-usdt-binance.pdf" target="_blank" class="text-blue-600 underline">📘
+                      Guía PDF - Cómo enviar USDC desde Binance a UNISWAP</a>
+                  </li>
+                  <li>
+                    <strong>Paso 3: Cambia USDC por GS</strong><br>
+                    <a href="https://app.uniswap.org/explore/tokens/polygon/0x9c2cd31784ffd13350058ac199f884bb166ce41c?utm_medium=mobile&utm_source=share-tdp"
+                      target="_blank" class="text-blue-600 underline">🔁 Intercambiar USDT por GS en UNISWAP</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="security-tips mt-6 p-4 bg-yellow-100 border border-yellow-300 rounded">
+                <h4 class="font-semibold text-yellow-800 mb-2">🔒 Recomendaciones de seguridad</h4>
+                <ul class="list-disc list-inside text-yellow-900 text-lg">
+                  <li>Guarda tu frase de UNISWAP en un lugar seguro.</li>
+                  <li>No la compartas con nadie, nunca.</li>
+                  <li>Usa solo los enlaces oficiales.</li>
+                </ul>
+              </div>
+
+              <div class="contact mt-5 text-center text-lg">
+                <p>Si tienes dudas, contáctanos: <a href="mailto:info@goldstory.site" class="text-blue-600 underline">📩
+                    info@goldstory.site</a></p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-lg bg-default">
+      <div class="security-tips container">
+        <h4 class="text-dark mt-5 mb-3"> Transparencia y uso de fondos: </h4>
+        <p class="text-lg">GoldStory Token (GS) es un token simbólico creado con el único propósito de financiar el proyecto de comercio de oro entre Kampala (Uganda) y Dubái.</p>
+        <h4 class="text-dark mt-5 mb-3"> La recaudación se dividirá en dos etapas:</h4>  
+        <ul class="list-unstyled text-lg">
+          <li>
+            <h4 class="text-dark mt-5 mb-3">Etapa 1:</h4>
+            <p>Una vez se recauden $125,000 USD, estos serán retirados por el equipo fundador para ejecutar la primera fase de compra y logística del oro.</p>
+          </li>
+          <li>
+            <h4 class="text-dark mt-5 mb-3">Etapa 2:</h4>
+            <p>Al alcanzar el total de $250,000 USD, se retirará el resto de los fondos para completar la operación y distribución correspondiente.</li></p>
+          </li>
+          <li> La comunidad podrá monitorear en tiempo real el progreso de la recaudación mediante un panel público conectado a la red Polygon.
+          GoldStory NO constituye una inversión financiera ni promete retorno garantizado. 
+          Todos los participantes aceptan que su contribución es voluntaria y destinada al desarrollo del proyecto de forma transparente y trazable.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Footer-->
+    <footer class="section footer-classic context-dark">
+      <div class="container">
+        <div class="row row-30">
+          <div class="col-md-4 col-xl-5">
+            <div class="pr-xl-4">
+              <a class="brand" href="index.html"><img class="brand-logo-light" src="images/logo-inverse-415x103.png"
+                  alt="" width="207" height="51" /></a>
+              <p>GoldStory: Apoya historias, genera valor.</p>
+              <p class="rights"><span>© </span><span class="copyright-year"></span><span> GoldStory.</span><span> Todos
+                  los derechos reservados.</span></p>
+            </div>
+          </div>
+          <div class="col-md-8 col-xl-7">
+            <div class="row row-30">
+              <div class="col-md-4">
+                <h5>Enlaces Rápidos</h5>
+                <ul class="nav-list">
+                  <li><a href="index.html">Inicio</a></li>
+                  <li><a href="about-us.html">Nosotros</a></li>
+                  <li><a href="buy.html">Compra Tokens</a></li>
+                  <li><a href="terminosycondiciones.html">Terminos y Condiciones</a></li>
+                  <li><a href="contact-us.html">Contactos</a></li>
+                </ul>
+              </div>
+              <div class="col-md-4">
+                <h5>Información</h5>
+                <dl class="contact-list">
+                  <dt>Dirección:</dt>
+                  <dd>carrera 44#84-126</dd>
+                </dl>
+                <dl class="contact-list">
+                  <dt>Correo Electrónico:</dt>
+                  <dd><a href="mailto:#">info@goldstory.com</a></dd>
+                </dl>
+                <dl class="contact-list">
+                  <dt>Teléfono:</dt>
+                  <dd>3225921707</dd>
+                </dl>
+              </div>
+              <div class="col-md-4">
+                <h5>Síguenos</h5>
+                <ul class="list-inline list-social list-social-white">
+            <!--      <li><a class="icon mdi mdi-facebook" href="#"></a></li> -->
+                  <li><a class="icon mdi mdi-twitter" href="https://x.com/GoldStoryToken"></a></li>
+                  <li><a class="icon mdi mdi-instagram" href="https://www.instagram.com/goldstorytoken/"></a></li>
+                  <li><a class="icon mdi mdi-youtube"  href="https://www.facebook.com/karitomostra"></a></li>
+                <!--     <li><a class="icon mdi mdi-google-plus" href="#"></a></li>  -->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+  
+  </section>
+  <!-- Page Footer-->
+
+  </div>
+  <a href="buymeta.html" class="ui-to-top ui-to-top--buy active">Comprar</a>
+  <div class="snackbars" id="form-output-global"></div>
+  <script src="../js/core.min.js"></script>
+  <script src="../js/script.js"></script>
+</body>
+
+</html>
