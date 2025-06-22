@@ -5,8 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Widget GoldStory</title>
   <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
- <script src="https://cdn.jsdelivr.net/npm/magic-sdk/dist/magic.js"></script>
-
+  <script src="https://cdn.jsdelivr.net/npm/magic-sdk/dist/magic.js"></script>
   <style>
     body { font-family: Arial, sans-serif; padding: 1rem; background: #f9fafb; }
     .card { max-width: 500px; margin: auto; background: white; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 2rem; }
@@ -44,7 +43,7 @@
       const email = document.getElementById("email").value;
       if (!email) return alert("Ingresa tu correo");
 
-      const magic = new window.Magic("pk_live_DUMMY_PUBLIC_KEY"); // Reemplazar luego con tu key real
+      const magic = new window.Magic("pk_live_871F49159971B8DF");
       const web3 = new Web3(magic.rpcProvider);
 
       try {
