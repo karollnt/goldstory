@@ -1,7 +1,7 @@
 window.addEventListener("load", () => {
-  const MMSDK = new MetaMaskSDK({
+  const MMSDK = new MetaMaskSDK.MetaMaskSDK({
     dappMetadata: {
-      name: "Tu DApp Web",
+      name: "Mi DApp Web",
       url: window.location.href,
     },
     injectProvider: true,
