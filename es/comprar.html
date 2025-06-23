@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Tu DApp Web</title>
-  <!-- Política de seguridad compatible con scripts externos -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://unpkg.com;">
   <style>
     body { font-family: sans-serif; text-align: center; padding: 2em; }
     button { padding: 10px 20px; font-size: 16px; }
@@ -16,10 +15,31 @@
   <button id="connectBtn">Conectar Wallet</button>
   <div id="wallet"></div>
 
-  <!-- 1️⃣ Cargamos primero el SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@0.33.0/dist/metamask-sdk.umd.min.js"></script>
+  <!-- ✅ IMPORTAMOS EL SDK COMO MÓDULO -->
+  <script type="module">
+    import { MetaMaskSDK } from 'https://unpkg.com/@metamask/sdk@1.1.0/dist/browser/es.js';
 
-  <!-- 2️⃣ Luego nuestro script que depende del SDK -->
-  <script src="metamask-connect.js"></script>
+    const MMSDK = new MetaMaskSDK({
+      dappMetadata: {
+        name: "Tu DApp Web",
+        url: window.location.href,
+      },
+      injectProvider: true,
+      preferDesktop: false,
+      headless: false,
+    });
+
+    const ethereum = MMSDK.getProvider();
+
+    document.getElementById("connectBtn").onclick = async () => {
+      try {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        document.getElementById("wallet").innerText = "Conectado: " + accounts[0];
+      } catch (err) {
+        console.error("Error al conectar", err);
+        document.getElementById("wallet").innerText = "Error al conectar wallet";
+      }
+    };
+  </script>
 </body>
 </html>
