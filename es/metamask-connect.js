@@ -20,7 +20,7 @@ window.addEventListener("load", () => {
       walletDiv.innerText = "Conectado: " + accounts[0];
     } catch (err) {
       console.error("No se pudo conectar a MetaMask", err);
-      walletDiv.innerText = "Error al conectar";
+      walletDiv.innerText = "Error al conectar wallet";
     }
   };
 });
