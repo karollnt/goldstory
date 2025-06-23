@@ -3,15 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <title>Tu DApp Web</title>
+  <!-- Política de seguridad compatible con scripts externos -->
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
-  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@0.33.0/dist/metamask-sdk.umd.min.js"></script>
+
+  <!-- SDK de MetaMask -->
+  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@0.33.0/dist/metamask-sdk.umd.min.js" defer></script>
+
+  <!-- Tu script externo -->
+  <script src="metamask-connect.js" defer></script>
+
+  <style>
+    body { font-family: sans-serif; text-align: center; padding: 2em; }
+    button { padding: 10px 20px; font-size: 16px; }
+    #wallet { margin-top: 20px; font-weight: bold; }
+  </style>
 </head>
 <body>
-  <h1>Conectar MetaMask sin Extensión</h1>
-  <button id="connectBtn">Conectar</button>
+  <h1>Conectar MetaMask</h1>
+  <button id="connectBtn">Conectar Wallet</button>
   <div id="wallet"></div>
-
-  <!-- ✅ Este es el archivo externo -->
-  <script src="metamask-connect.js"></script>
 </body>
 </html>
