@@ -2,47 +2,16 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Conectar MetaMask en Web</title>
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-eval' https://cdn.jsdelivr.net;">
+  <title>Tu DApp Web</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
   <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@0.33.0/dist/metamask-sdk.umd.min.js"></script>
-  <style>
-    body { font-family: sans-serif; text-align: center; padding: 2em; }
-    button { padding: 10px 20px; font-size: 16px; }
-    #wallet { margin-top: 20px; font-weight: bold; }
-  </style>
 </head>
 <body>
-  <h1>Tu DApp Web</h1>
-  <button id="connectBtn">Conectar MetaMask</button>
+  <h1>Conectar MetaMask sin Extensión</h1>
+  <button id="connectBtn">Conectar</button>
   <div id="wallet"></div>
 
-  <script>
-    window.addEventListener("load", () => {
-      const MMSDK = new MetaMaskSDK.MetaMaskSDK({
-        dappMetadata: {
-          name: "Mi DApp Web",
-          url: window.location.href,
-        },
-        injectProvider: true,
-        preferDesktop: false, // Si está en desktop sin extensión, mostrará QR
-        headless: false,
-      });
-
-      const ethereum = MMSDK.getProvider();
-
-      const connectBtn = document.getElementById("connectBtn");
-      const walletDiv = document.getElementById("wallet");
-
-      connectBtn.onclick = async () => {
-        try {
-          const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-          walletDiv.innerText = "Conectado: " + accounts[0];
-        } catch (err) {
-          console.error("No se pudo conectar a MetaMask", err);
-          walletDiv.innerText = "Error al conectar";
-        }
-      };
-    });
-  </script>
+  <!-- ✅ Este es el archivo externo -->
+  <script src="metamask-connect.js"></script>
 </body>
 </html>
