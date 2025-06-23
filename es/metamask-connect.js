@@ -1,4 +1,5 @@
 window.addEventListener("load", () => {
+  // Ahora sí: MetaMaskSDK está disponible globalmente
   const MMSDK = new MetaMaskSDK.MetaMaskSDK({
     dappMetadata: {
       name: "Mi DApp Web",
