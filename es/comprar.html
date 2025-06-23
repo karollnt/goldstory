@@ -1,9 +1,12 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Conectar MetaMask + Comprar con Transak</title>
+
+  <!-- SDK correcto -->
+  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@1.1.0/dist/metamask-sdk.umd.min.js"></script>
+
   <style>
     body { font-family: sans-serif; text-align: center; padding: 2em; }
     iframe { width: 100%; height: 600px; border: none; margin-top: 20px; }
@@ -13,15 +16,19 @@
 <body>
 
   <h1>Conectar MetaMask y Comprar Cripto con Transak</h1>
+
   <button id="connectButton">Conectar MetaMask</button>
+
   <div id="walletAddress" style="margin-top: 1em;"></div>
   <div id="transakWidget"></div>
 
-  <!-- Carga del SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@1.1.0/dist/metamask-sdk.umd.min.js" onload="initApp()"></script>
-
   <script>
-    function initApp() {
+    window.addEventListener("load", () => {
+      if (!window.MetaMaskSDK) {
+        alert("MetaMask SDK no está disponible. Revisa el script o conexión a internet.");
+        return;
+      }
+
       const MMSDK = new MetaMaskSDK.MetaMaskSDK({
         dappMetadata: {
           name: "TuDapp",
@@ -41,13 +48,14 @@
 
           const transakDiv = document.getElementById("transakWidget");
           const transakUrl = `https://global.transak.com?apiKey=YOUR_TRANSAK_API_KEY&walletAddress=${userAddress}&defaultCryptoCurrency=USDC&network=polygon&disableWalletAddressForm=true`;
+
           transakDiv.innerHTML = `<iframe src="${transakUrl}"></iframe>`;
         } catch (error) {
           console.error("Error al conectar MetaMask", error);
           alert("Ocurrió un error al conectar con MetaMask.");
         }
       };
-    }
+    });
   </script>
 
 </body>
