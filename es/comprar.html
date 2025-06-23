@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8" />
   <title>Tu DApp Web</title>
-  <!-- Política CSP segura para scripts externos -->
   <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
   <style>
     body { font-family: sans-serif; text-align: center; padding: 2em; }
@@ -16,10 +15,10 @@
   <button id="connectBtn">Conectar Wallet</button>
   <div id="wallet"></div>
 
-  <!-- ✅ SDK de MetaMask UMD (funciona en navegador sin CORS) -->
+  <!-- ✅ Cargar SDK UMD -->
   <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@1.1.0/dist/metamask-sdk.umd.min.js"></script>
 
-  <!-- ✅ Tu JS separado -->
+  <!-- ✅ Tu script -->
   <script src="metamask-connect.js"></script>
 </body>
 </html>
