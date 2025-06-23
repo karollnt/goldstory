@@ -11,14 +11,14 @@
   </style>
 </head>
 <body>
-  <h1>Conectar MetaMask3</h1>
+  <h1>Conectar MetaMask4</h1>
   <button id="connectBtn">Conectar Wallet</button>
   <div id="wallet"></div>
 
-  <!-- ✅ Cargar SDK UMD -->
-  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@1.1.0/dist/metamask-sdk.umd.min.js"></script>
+  <!-- ✅ Cargar versión del SDK que sí funciona como global -->
+  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@0.2.5/dist/metamask-sdk.min.js"></script>
 
-  <!-- ✅ Tu script -->
+  <!-- ✅ Tu script (después del SDK) -->
   <script src="metamask-connect.js"></script>
 </body>
 </html>
