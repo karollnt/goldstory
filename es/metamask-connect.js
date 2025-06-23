@@ -1,5 +1,5 @@
 window.addEventListener("load", () => {
-  const MMSDK = new MetaMaskSDK.MetaMaskSDK({
+  const MMSDK = new window.MetaMaskSDK.MetaMaskSDK({
     dappMetadata: {
       name: "Mi DApp Web",
       url: window.location.href,
