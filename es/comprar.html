@@ -2,9 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Tu DApp Web</title>
-  <!-- CSP: solo se permiten scripts desde tu servidor y cdn.jsdelivr.net -->
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
+  <title>Conectar Wallet con Onboard</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://unpkg.com;">
   <style>
     body { font-family: sans-serif; text-align: center; padding: 2em; }
     button { padding: 10px 20px; font-size: 16px; }
@@ -12,14 +11,11 @@
   </style>
 </head>
 <body>
-  <h1>Conectar MetaMask1</h1>
-  <button id="connectBtn">Conectar Wallet</button>
+  <h1>Conectar Wallet</h1>
+  <button id="connectBtn">Conectar</button>
   <div id="wallet"></div>
 
-  <!-- ✅ SDK oficial desde CDN, usando defer -->
-  <script defer src="https://cdn.jsdelivr.net/npm/@metamask/sdk@1.1.0/dist/metamask-sdk.umd.min.js"></script>
-
-  <!-- ✅ Tu script separado, sin inline -->
-  <script defer src="metamask-connect.js"></script>
+  <!-- ✅ Blocknative Onboard desde CDN -->
+  <script type="module" src="onboard-connect.js"></script>
 </body>
 </html>
