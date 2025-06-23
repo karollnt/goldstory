@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <title>Tu DApp Web</title>
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://unpkg.com;">
+  <!-- Política CSP segura para scripts externos -->
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://cdn.jsdelivr.net;">
   <style>
     body { font-family: sans-serif; text-align: center; padding: 2em; }
     button { padding: 10px 20px; font-size: 16px; }
@@ -11,11 +12,14 @@
   </style>
 </head>
 <body>
-  <h1>Conectar MetaMask2</h1>
+  <h1>Conectar MetaMask</h1>
   <button id="connectBtn">Conectar Wallet</button>
   <div id="wallet"></div>
 
-  <!-- ✅ Este script es externo y modular -->
-  <script type="module" src="metamask-connect.js"></script>
+  <!-- ✅ SDK de MetaMask UMD (funciona en navegador sin CORS) -->
+  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk@1.1.0/dist/metamask-sdk.umd.min.js"></script>
+
+  <!-- ✅ Tu JS separado -->
+  <script src="metamask-connect.js"></script>
 </body>
 </html>
