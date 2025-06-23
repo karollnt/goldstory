@@ -11,35 +11,11 @@
   </style>
 </head>
 <body>
-  <h1>Conectar MetaMask1</h1>
+  <h1>Conectar MetaMask2</h1>
   <button id="connectBtn">Conectar Wallet</button>
   <div id="wallet"></div>
 
-  <!-- ✅ IMPORTAMOS EL SDK COMO MÓDULO -->
-  <script type="module">
-    import { MetaMaskSDK } from 'https://unpkg.com/@metamask/sdk@1.1.0/dist/browser/es.js';
-
-    const MMSDK = new MetaMaskSDK({
-      dappMetadata: {
-        name: "Tu DApp Web",
-        url: window.location.href,
-      },
-      injectProvider: true,
-      preferDesktop: false,
-      headless: false,
-    });
-
-    const ethereum = MMSDK.getProvider();
-
-    document.getElementById("connectBtn").onclick = async () => {
-      try {
-        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
-        document.getElementById("wallet").innerText = "Conectado: " + accounts[0];
-      } catch (err) {
-        console.error("Error al conectar", err);
-        document.getElementById("wallet").innerText = "Error al conectar wallet";
-      }
-    };
-  </script>
+  <!-- ✅ Este script es externo y modular -->
+  <script type="module" src="metamask-connect.js"></script>
 </body>
 </html>
