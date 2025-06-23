@@ -1,66 +1,57 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Widget GoldStory</title>
-  <script src="https://cdn.jsdelivr.net/npm/web3@1.6.1/dist/web3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/magic-sdk/dist/magic.js"></script>
+  <meta charset="UTF-8">
+  <title>Conectar MetaMask + Comprar con Transak</title>
+  <script src="https://cdn.jsdelivr.net/npm/@metamask/sdk/dist/browser/MetaMaskSDK.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; padding: 1rem; background: #f9fafb; }
-    .card { max-width: 500px; margin: auto; background: white; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,0.1); padding: 2rem; }
-    button { padding: 0.5rem 1rem; border-radius: 0.5rem; border: none; background: #facc15; cursor: pointer; margin-top: 1rem; font-weight: bold; }
-    iframe { width: 100%; height: 600px; border: none; margin-top: 1rem; }
+    body { font-family: sans-serif; text-align: center; padding: 2em; }
+    iframe { width: 100%; height: 600px; border: none; margin-top: 20px; }
+    button { padding: 10px 20px; font-size: 16px; }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h2>Compra GoldStory (GS)</h2>
 
-    <p>1. Ingresa tu correo para crear una wallet:</p>
-    <input type="email" id="email" placeholder="tu@email.com" style="width: 100%; padding: 0.5rem; margin-top: 0.5rem" />
-    <button onclick="loginWithMagic()">Crear Wallet</button>
+  <h1>Conectar MetaMask y Comprar Cripto con Transak</h1>
 
-    <div id="wallet-info" style="display:none">
-      <p><strong>Wallet creada:</strong> <span id="wallet-address"></span></p>
+  <button id="connectButton">Conectar MetaMask</button>
 
-      <p>2. Compra MATIC con tarjeta:</p>
-      <iframe id="transak-frame" style="display:none"></iframe>
+  <div id="walletAddress" style="margin-top: 1em;"></div>
 
-      <button onclick="loadTransak()">Comprar MATIC</button>
-
-      <p>3. Luego, haz swap de MATIC a GS directamente:</p>
-      <a href="https://app.uniswap.org/#/swap?inputCurrency=polygon&outputCurrency=0x9c2cd31784ffd13350058ac199f884bb166ce41c&chain=polygon" target="_blank">
-        <button>Ir al Swap en Uniswap</button>
-      </a>
-    </div>
-  </div>
+  <div id="transakWidget"></div>
 
   <script>
-    let userAddress = null;
-
-    async function loginWithMagic() {
-      const email = document.getElementById("email").value;
-      if (!email) return alert("Ingresa tu correo");
-
-      const magic = new window.Magic("pk_live_871F49159971B8DF");
-      const web3 = new Web3(magic.rpcProvider);
-
-      try {
-        await magic.auth.loginWithMagicLink({ email });
-        const accounts = await web3.eth.getAccounts();
-        userAddress = accounts[0];
-        document.getElementById("wallet-address").innerText = userAddress;
-        document.getElementById("wallet-info").style.display = "block";
-      } catch (err) {
-        alert("Error al crear la wallet: " + err.message);
+    // Inicializar MetaMask SDK
+    const MMSDK = new MetaMaskSDK.MetaMaskSDK({
+      dappMetadata: {
+        name: "TuDapp",
+        url: window.location.href
       }
-    }
+    });
 
-    function loadTransak() {
-      const frame = document.getElementById("transak-frame");
-     frame.src = `https://global.transak.com?apiKey=f71da956-3aef-4423-ae09-86e6d75f5fdb&hostURL=https://goldstory.site&defaultCryptoCurrency=MATIC&walletAddress=${userAddress}&network=polygon&disableWalletAddressForm=true`;
-    }
+    const ethereum = MMSDK.getProvider(); // similar a window.ethereum
+
+    const connectButton = document.getElementById("connectButton");
+    const walletDisplay = document.getElementById("walletAddress");
+
+    connectButton.onclick = async () => {
+      try {
+        const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+        const userAddress = accounts[0];
+        walletDisplay.innerText = "Conectado: " + userAddress;
+
+        // Cargar Transak widget embebido con dirección
+        const transakDiv = document.getElementById("transakWidget");
+        const transakUrl = `https://global.transak.com?apiKey=YOUR_TRANSAK_API_KEY&walletAddress=${userAddress}&defaultCryptoCurrency=USDC&network=polygon&disableWalletAddressForm=true`;
+        
+        transakDiv.innerHTML = `<iframe src="${transakUrl}"></iframe>`;
+
+      } catch (error) {
+        console.error("Error al conectar MetaMask", error);
+        alert("Ocurrió un error al conectar con MetaMask.");
+      }
+    };
   </script>
+
 </body>
 </html>
