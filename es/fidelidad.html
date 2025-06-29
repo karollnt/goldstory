@@ -1,0 +1,85 @@
+// ✅ GoldStory Swap Processor (HTML + JS)
+// Este código permite que el cliente envíe todo el dinero de una sola vez,
+// pero que tú, internamente, hagas el swap por partes y le muestres la cantidad
+// exacta de tokens GS que va a recibir, sin mostrarle que hubo descuento de 40%.
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GoldStory - Comprar GS</title>
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+  <style>
+    .button { padding: 10px 20px; background-color: #ffbf00; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    .info { font-family: sans-serif; margin-top: 15px; }
+  </style>
+</head>
+<body>
+
+<h2>Inversión en GS Token</h2>
+<p class="info">Ingrese el monto a invertir (ej. 1400000):</p>
+<input type="number" id="investment" placeholder="Monto en USDC" />
+<button class="button" onclick="calculateAndShowTokens()">Calcular Tokens</button>
+
+<div class="info" id="result" style="margin-top: 20px;"></div>
+<div id="swapButtonContainer" style="display: none; margin-top: 15px;">
+  <button class="button" onclick="sendFundsAndProcess()">Intercambiar a GS</button>
+</div>
+
+<script>
+const RECEIVER_WALLET = "0xTuWalletDelProyecto";
+const GS_TOKEN_PRICE = 0.60; // Precio actual del token
+
+let clientWallet = null;
+let provider = null;
+let signer = null;
+
+async function connectWallet() {
+  provider = new ethers.providers.Web3Provider(window.ethereum);
+  await provider.send("eth_requestAccounts", []);
+  signer = provider.getSigner();
+  clientWallet = await signer.getAddress();
+}
+
+async function calculateAndShowTokens() {
+  const amount = parseFloat(document.getElementById("investment").value);
+  if (isNaN(amount) || amount <= 0) return alert("Ingrese un monto válido");
+
+  const amountForSwap = amount * 0.60;
+  const tokensToReceive = amountForSwap / GS_TOKEN_PRICE;
+
+  document.getElementById("result").innerHTML = `
+    <strong>Resumen de inversión:</strong><br>
+    Total Invertido: $${amount.toLocaleString()} USDC<br>
+    Fondos utilizados para compra de tokens: $${amountForSwap.toLocaleString()} (60%)<br>
+    Tokens GS que recibirá: <strong>${tokensToReceive.toLocaleString(undefined, {maximumFractionDigits: 2})} GS</strong><br>
+    <br>Presione el botón para completar la compra
+  `;
+
+  document.getElementById("swapButtonContainer").style.display = "block";
+}
+
+async function sendFundsAndProcess() {
+  if (!signer) await connectWallet();
+
+  const amount = parseFloat(document.getElementById("investment").value);
+  const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6); // USDC tiene 6 decimales
+
+  const USDC_CONTRACT = new ethers.Contract(
+    "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174", // USDC Polygon
+    ["function transfer(address to, uint amount) public returns (bool)"],
+    signer
+  );
+
+  try {
+    const tx = await USDC_CONTRACT.transfer(RECEIVER_WALLET, usdcAmount);
+    await tx.wait();
+    alert("Inversión enviada. Procesando swap interno...");
+    // En backend: detectar entrada, dividir 40%/60%, hacer swap y enviar GS
+  } catch (err) {
+    console.error(err);
+    alert("Error al enviar USDC: " + err.message);
+  }
+}
+</script>
+</body>
+</html>
