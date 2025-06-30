@@ -83,13 +83,19 @@
       }
 
       // USDC contract addresses on Polygon
-      const USDC_CONTRACTS = {
-        // Standard USDC on Polygon (bridged from Ethereum)
-        '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174': 'USDC (Bridged)',
-        // Native USDC on Polygon (issued by Circle)
-        '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359': 'USDC (Native)'
-      };
-
+      const USDC_CONTRACTS = [
+        {
+          name: 'Native USDC',
+          address: '0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359',
+          decimals: 6
+        },
+        {
+          name: 'Bridged USDC',
+          address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
+          decimals: 6
+        }
+      ];
+      
       try {
         // Get user's address and network info
         const userAddress = await signer.getAddress();
@@ -97,58 +103,58 @@
         console.log("Connected to network:", network.name, "(Chain ID:", network.chainId, ")");
         console.log("User address:", userAddress);
         
-        // Check balance for each USDC contract
+        // Find which USDC contract has balance
+        let usdcContract = null;
         let balance = ethers.BigNumber.from(0);
-        let usdcContractAddress = '';
         
-        for (const [address, name] of Object.entries(USDC_CONTRACTS)) {
+        for (const contractInfo of USDC_CONTRACTS) {
           const contract = new ethers.Contract(
-            address,
+            contractInfo.address,
             ["function balanceOf(address account) public view returns (uint256)"],
             signer
           );
           
           const contractBalance = await contract.balanceOf(userAddress);
-          console.log(`${name} (${address}) balance:`, 
-            ethers.utils.formatUnits(contractBalance, 6), 'USDC');
+          console.log(`${contractInfo.name} (${contractInfo.address}) balance:`, 
+            ethers.utils.formatUnits(contractBalance, contractInfo.decimals), 'USDC');
             
-          if (contractBalance.gt(0)) {
+          if (contractBalance.gt(0) && balance.isZero()) {
             balance = contractBalance;
-            usdcContractAddress = address;
+            usdcContract = {
+              ...contractInfo,
+              contract: new ethers.Contract(
+                contractInfo.address,
+                [
+                  "function transfer(address to, uint amount) public returns (bool)",
+                  "function balanceOf(address account) public view returns (uint256)"
+                ],
+                signer
+              )
+            };
           }
         }
         
-        if (balance.isZero()) {
+        if (!usdcContract) {
           throw new Error("No se encontró saldo de USDC en ninguna de las direcciones de contrato conocidas");
         }
         
-        console.log("Using USDC contract:", usdcContractAddress, USDC_CONTRACTS[usdcContractAddress]);
+        console.log("Usando contrato:", usdcContract.name, "(", usdcContract.address, ")");
         
-        const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6);
-        console.log("Requested amount in wei:", usdcAmount.toString());
+        const usdcAmount = ethers.utils.parseUnits(amount.toString(), usdcContract.decimals);
+        console.log("Monto solicitado:", amount, "USDC (en wei:", usdcAmount.toString(), ")");
         
         // Check if balance is sufficient
         if (balance.lt(usdcAmount)) {
-          const formattedBalance = ethers.utils.formatUnits(balance, 6);
+          const formattedBalance = ethers.utils.formatUnits(balance, usdcContract.decimals);
           throw new Error(`Saldo insuficiente. Tu saldo actual es: ${formattedBalance} USDC`);
         }
-        
-        // Create the USDC contract with the correct address for the transfer
-        const USDC_CONTRACT = new ethers.Contract(
-          usdcContractAddress,
-          [
-            "function transfer(address to, uint amount) public returns (bool)",
-            "function balanceOf(address account) public view returns (uint256)"
-          ],
-          signer
-        );
 
         // Estimate gas first
-        const gas = await USDC_CONTRACT.estimateGas.transfer(RECEIVER_WALLET, usdcAmount);
+        const gas = await usdcContract.contract.estimateGas.transfer(RECEIVER_WALLET, usdcAmount);
         console.log("Gas estimado:", gas.toString());
 
         // Proceed with transfer
-        const tx = await USDC_CONTRACT.transfer(RECEIVER_WALLET, usdcAmount);
+        const tx = await usdcContract.contract.transfer(RECEIVER_WALLET, usdcAmount);
         await tx.wait();
         alert("Inversión enviada. Procesando internamente...");
       } catch (error) {
