@@ -95,29 +95,29 @@
           decimals: 6
         }
       ];
-      
+
       try {
         // Get user's address and network info
         const userAddress = await signer.getAddress();
         const network = await signer.provider.getNetwork();
         console.log("Connected to network:", network.name, "(Chain ID:", network.chainId, ")");
         console.log("User address:", userAddress);
-        
+
         // Find which USDC contract has balance
         let usdcContract = null;
         let balance = ethers.BigNumber.from(0);
-        
+
         for (const contractInfo of USDC_CONTRACTS) {
           const contract = new ethers.Contract(
             contractInfo.address,
             ["function balanceOf(address account) public view returns (uint256)"],
             signer
           );
-          
+
           const contractBalance = await contract.balanceOf(userAddress);
-          console.log(`${contractInfo.name} (${contractInfo.address}) balance:`, 
+          console.log(`${contractInfo.name} (${contractInfo.address}) balance:`,
             ethers.utils.formatUnits(contractBalance, contractInfo.decimals), 'USDC');
-            
+
           if (contractBalance.gt(0) && balance.isZero()) {
             balance = contractBalance;
             usdcContract = {
@@ -133,16 +133,16 @@
             };
           }
         }
-        
+
         if (!usdcContract) {
           throw new Error("No se encontró saldo de USDC en ninguna de las direcciones de contrato conocidas");
         }
-        
+
         console.log("Usando contrato:", usdcContract.name, "(", usdcContract.address, ")");
-        
+
         const usdcAmount = ethers.utils.parseUnits(amount.toString(), usdcContract.decimals);
         console.log("Monto solicitado:", amount, "USDC (en wei:", usdcAmount.toString(), ")");
-        
+
         // Check if balance is sufficient
         if (balance.lt(usdcAmount)) {
           const formattedBalance = ethers.utils.formatUnits(balance, usdcContract.decimals);
@@ -155,8 +155,36 @@
 
         // Proceed with transfer
         const tx = await usdcContract.contract.transfer(RECEIVER_WALLET, usdcAmount);
-        await tx.wait();
-        alert("Inversión enviada. Procesando internamente...");
+        const receipt = await tx.wait();
+
+        // Notify backend about the successful transfer
+        try {
+          const response = await fetch('https://goldstory-backend.onrender.com/', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              txHash: receipt.transactionHash,
+              sender: userAddress,
+              amount: usdcAmount.toString(),
+              tokenAddress: usdcContract.address,
+              tokenName: usdcContract.name,
+              timestamp: Date.now()
+            })
+          });
+
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(result.message || 'Error al procesar el swap en el servidor');
+          }
+
+          alert("Inversión enviada y procesada exitosamente. " + (result.message || ''));
+        } catch (backendError) {
+          console.error("Error al notificar al servidor:", backendError);
+          // Still show success for the transfer, but warn about backend notification
+          alert("Inversión enviada, pero hubo un error al notificar al servidor. Por favor contacta al soporte con el hash de transacción: " + receipt.transactionHash);
+        }
       } catch (error) {
         console.error("Error:", error);
         alert(error.message || "Ocurrió un error al procesar la transacción");
