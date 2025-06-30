@@ -7,82 +7,101 @@
 
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>GoldStory - Comprar GS</title>
   <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
   <style>
-    .button { padding: 10px 20px; background-color: #ffbf00; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    .info { font-family: sans-serif; margin-top: 15px; }
+    .button {
+      padding: 10px 20px;
+      background-color: #ffbf00;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .info {
+      font-family: sans-serif;
+      margin-top: 15px;
+    }
   </style>
 </head>
+
 <body>
 
-<h2>Inversión en GS Token</h2>
-<p class="info">Ingrese el monto a invertir (ej. 1400000):</p>
-<input type="number" id="investment" placeholder="Monto en USDC" />
-<button class="button" onclick="calculateAndShowTokens()">Calcular Tokens</button>
+  <h2>Inversión en GS Token</h2>
+  <p class="info">Ingrese el monto a invertir (ej. 1400000):</p>
+  <input type="number" id="investment" placeholder="Monto en USDC" />
+  <button class="button" onclick="calculateAndShowTokens()">Calcular Tokens</button>
 
-<div class="info" id="result" style="margin-top: 20px;"></div>
-<div id="swapButtonContainer" style="display: none; margin-top: 15px;">
-  <button class="button" onclick="sendFundsAndProcess()">Intercambiar a GS</button>
-</div>
+  <div class="info" id="result" style="margin-top: 20px;"></div>
+  <div id="swapButtonContainer" style="display: none; margin-top: 15px;">
+    <button class="button" onclick="sendFundsAndProcess()">Intercambiar a GS</button>
+  </div>
 
-<script>
-const RECEIVER_WALLET = "0x8Ff4A868966B55e673D962f66ca5421d49d9Bda4";
-const GS_TOKEN_PRICE = 0.60;
+  <script>
+    const RECEIVER_WALLET = "0x8Ff4A868966B55e673D962f66ca5421d49d9Bda4";
+    const GS_TOKEN_PRICE = 0.60;
 
-let clientWallet = null;
-let provider = null;
-let signer = null;
+    let clientWallet = null;
+    let provider = null;
+    let signer = null;
 
-async function connectWallet() {
-  provider = new ethers.providers.Web3Provider(window.ethereum);
-  await provider.send("eth_requestAccounts", []);
-  signer = provider.getSigner();
-  clientWallet = await signer.getAddress();
-}
+    async function connectWallet() {
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      await provider.send("eth_requestAccounts", []);
+      signer = provider.getSigner();
+      clientWallet = await signer.getAddress();
+    }
 
-async function calculateAndShowTokens() {
-  const amount = parseFloat(document.getElementById("investment").value);
-  if (isNaN(amount) || amount <= 0) return alert("Ingrese un monto válido");
+    async function calculateAndShowTokens() {
+      const amount = parseFloat(document.getElementById("investment").value);
+      if (isNaN(amount) || amount <= 0) return alert("Ingrese un monto válido");
 
-  const amountForSwap = amount * 0.60;
-  const tokensToReceive = amountForSwap / GS_TOKEN_PRICE;
+      const amountForSwap = amount * 0.60;
+      const tokensToReceive = amountForSwap / GS_TOKEN_PRICE;
 
-  document.getElementById("result").innerHTML = `
+      document.getElementById("result").innerHTML = `
     <strong>Resumen de inversión:</strong><br>
     Total Invertido: $${amount.toLocaleString()} USDC<br>
     Fondos utilizados para compra de tokens: $${amountForSwap.toLocaleString()} (60%)<br>
-    Tokens GS que recibirá: <strong>${tokensToReceive.toLocaleString(undefined, {maximumFractionDigits: 2})} GS</strong><br>
+    Tokens GS que recibirá: <strong>${tokensToReceive.toLocaleString(undefined, { maximumFractionDigits: 2 })} GS</strong><br>
     <br>Presione el botón para completar la compra
   `;
 
-  document.getElementById("swapButtonContainer").style.display = "block";
-}
+      document.getElementById("swapButtonContainer").style.display = "block";
+    }
 
-async function sendFundsAndProcess() {
-  if (!signer) await connectWallet();
+    async function sendFundsAndProcess() {
+      if (!signer) await connectWallet();
 
-  const amount = parseFloat(document.getElementById("investment").value);
-  const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6);
+      const amount = parseFloat(document.getElementById("investment").value);
+      const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6);
 
-  const USDC_CONTRACT = new ethers.Contract(
-    "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-    ["function transfer(address to, uint amount) public returns (bool)"],
-    signer
-  );
+      const USDC_CONTRACT = new ethers.Contract(
+        "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
+        ["function transfer(address to, uint amount) public returns (bool)"],
+        signer
+      );
 
-  try {
-    const tx = await USDC_CONTRACT.transfer(RECEIVER_WALLET, usdcAmount);
-    await tx.wait();
-    alert("Inversión enviada. Procesando internamente...");
-  } catch (err) {
-    console.error(err);
-    alert("Error al enviar USDC: " + err.message);
-  }
-}
-</script>
+      try {
+        const tx = await USDC_CONTRACT.transfer(RECEIVER_WALLET, usdcAmount);
+        try {
+          const gas = await USDC_CONTRACT.estimateGas.transfer(RECEIVER_WALLET, usdcAmount);
+        } catch (error) {
+          console.error("Error al estimar el gas:", error.reason);
+        }
+        await tx.wait();
+        alert("Inversión enviada. Procesando internamente...");
+      } catch (err) {
+        console.error(err);
+        alert("Error al enviar USDC: " + err.message);
+      }
+    }
+  </script>
 </body>
+
 </html>
 
 // ===========================================
@@ -105,58 +124,58 @@ const BROKER_WALLET = process.env.BROKER_WALLET;
 const router = new AlphaRouter({ chainId: ChainId.POLYGON, provider });
 
 async function processIncomingPayment(clientAddress, amountUSDC) {
-  const sixtyPercent = amountUSDC.mul(60).div(100);
-  const fifteenPercent = amountUSDC.mul(15).div(100);
+const sixtyPercent = amountUSDC.mul(60).div(100);
+const fifteenPercent = amountUSDC.mul(15).div(100);
 
-  const usdc = new ethers.Contract(
-    USDC_ADDRESS,
-    ["function transfer(address to, uint amount) public returns (bool)"],
-    wallet
-  );
+const usdc = new ethers.Contract(
+USDC_ADDRESS,
+["function transfer(address to, uint amount) public returns (bool)"],
+wallet
+);
 
-  // Enviar 15% al broker
-  await usdc.transfer(BROKER_WALLET, fifteenPercent);
+// Enviar 15% al broker
+await usdc.transfer(BROKER_WALLET, fifteenPercent);
 
-  // Hacer swap del 60% a GS usando Uniswap
-  const USDC = new Token(ChainId.POLYGON, USDC_ADDRESS, 6);
-  const GS = new Token(ChainId.POLYGON, GS_ADDRESS, 18);
+// Hacer swap del 60% a GS usando Uniswap
+const USDC = new Token(ChainId.POLYGON, USDC_ADDRESS, 6);
+const GS = new Token(ChainId.POLYGON, GS_ADDRESS, 18);
 
-  const amountIn = CurrencyAmount.fromRawAmount(USDC, sixtyPercent.toString());
-  const route = await router.route(
-    amountIn,
-    GS,
-    TradeType.EXACT_INPUT,
-    {
-      recipient: wallet.address,
-      slippageTolerance: new Percent(50, 10_000), // 0.50%
-      deadline: Math.floor(Date.now() / 1000 + 1800),
-    }
-  );
+const amountIn = CurrencyAmount.fromRawAmount(USDC, sixtyPercent.toString());
+const route = await router.route(
+amountIn,
+GS,
+TradeType.EXACT_INPUT,
+{
+recipient: wallet.address,
+slippageTolerance: new Percent(50, 10_000), // 0.50%
+deadline: Math.floor(Date.now() / 1000 + 1800),
+}
+);
 
-  const tx = {
-    data: route.methodParameters.calldata,
-    to: route.methodParameters.to,
-    value: ethers.BigNumber.from(route.methodParameters.value),
-    from: wallet.address,
-    gasPrice: route.gasPriceWei,
-  };
+const tx = {
+data: route.methodParameters.calldata,
+to: route.methodParameters.to,
+value: ethers.BigNumber.from(route.methodParameters.value),
+from: wallet.address,
+gasPrice: route.gasPriceWei,
+};
 
-  const txResponse = await wallet.sendTransaction(tx);
-  const txReceipt = await txResponse.wait();
+const txResponse = await wallet.sendTransaction(tx);
+const txReceipt = await txResponse.wait();
 
-  console.log("Swap ejecutado. Enviando GS al cliente...");
+console.log("Swap ejecutado. Enviando GS al cliente...");
 
-  const gs = new ethers.Contract(
-    GS_ADDRESS,
-    ["function transfer(address to, uint amount) public returns (bool)"],
-    wallet
-  );
+const gs = new ethers.Contract(
+GS_ADDRESS,
+["function transfer(address to, uint amount) public returns (bool)"],
+wallet
+);
 
-  // Se puede calcular exactamente cuántos GS se recibieron, o extraerlo del recibo
-  const gsAmount = await gs.balanceOf(wallet.address);
-  await gs.transfer(clientAddress, gsAmount);
+// Se puede calcular exactamente cuántos GS se recibieron, o extraerlo del recibo
+const gsAmount = await gs.balanceOf(wallet.address);
+await gs.transfer(clientAddress, gsAmount);
 
-  console.log("Proceso completado: GS enviados al cliente.");
+console.log("Proceso completado: GS enviados al cliente.");
 }
 
 module.exports = { processIncomingPayment };
