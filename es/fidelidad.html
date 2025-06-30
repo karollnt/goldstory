@@ -77,28 +77,45 @@
       if (!signer) await connectWallet();
 
       const amount = parseFloat(document.getElementById("investment").value);
-      const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6);
+      if (isNaN(amount) || amount <= 0) {
+        alert("Por favor ingrese un monto válido mayor a cero");
+        return;
+      }
 
       const USDC_CONTRACT = new ethers.Contract(
         "0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174",
-        ["function transfer(address to, uint amount) public returns (bool)"],
+        [
+          "function transfer(address to, uint amount) public returns (bool)",
+          "function balanceOf(address account) public view returns (uint256)"
+        ],
         signer
       );
 
       try {
+        // Get user's address
+        const userAddress = await signer.getAddress();
+        
+        // Get user's USDC balance
+        const balance = await USDC_CONTRACT.balanceOf(userAddress);
+        const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6);
+        
+        // Check if balance is sufficient
+        if (balance.lt(usdcAmount)) {
+          const formattedBalance = ethers.utils.formatUnits(balance, 6);
+          throw new Error(`Saldo insuficiente. Tu saldo actual es: ${formattedBalance} USDC`);
+        }
+
+        // Estimate gas first
         const gas = await USDC_CONTRACT.estimateGas.transfer(RECEIVER_WALLET, usdcAmount);
         console.log("Gas estimado:", gas.toString());
-      } catch (error) {
-        console.error("Error al estimar el gas:", error.reason);
-      }
 
-      try {
+        // Proceed with transfer
         const tx = await USDC_CONTRACT.transfer(RECEIVER_WALLET, usdcAmount);
         await tx.wait();
         alert("Inversión enviada. Procesando internamente...");
-      } catch (err) {
-        console.error(err);
-        alert("Error al enviar USDC: " + err.message);
+      } catch (error) {
+        console.error("Error:", error);
+        alert(error.message || "Ocurrió un error al procesar la transacción");
       }
     }
   </script>
