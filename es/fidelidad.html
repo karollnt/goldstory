@@ -86,12 +86,14 @@
       );
 
       try {
+        const gas = await USDC_CONTRACT.estimateGas.transfer(RECEIVER_WALLET, usdcAmount);
+        console.log("Gas estimado:", gas.toString());
+      } catch (error) {
+        console.error("Error al estimar el gas:", error.reason);
+      }
+
+      try {
         const tx = await USDC_CONTRACT.transfer(RECEIVER_WALLET, usdcAmount);
-        try {
-          const gas = await USDC_CONTRACT.estimateGas.transfer(RECEIVER_WALLET, usdcAmount);
-        } catch (error) {
-          console.error("Error al estimar el gas:", error.reason);
-        }
         await tx.wait();
         alert("Inversión enviada. Procesando internamente...");
       } catch (err) {
