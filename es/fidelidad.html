@@ -92,16 +92,23 @@
       );
 
       try {
-        // Get user's address
+        // Get user's address and network info
         const userAddress = await signer.getAddress();
+        const network = await signer.provider.getNetwork();
+        console.log("Connected to network:", network.name, "(Chain ID:", network.chainId, ")");
+        console.log("User address:", userAddress);
         
         // Get user's USDC balance
         const balance = await USDC_CONTRACT.balanceOf(userAddress);
         const usdcAmount = ethers.utils.parseUnits(amount.toString(), 6);
         
+        console.log("Raw balance from contract:", balance.toString());
+        console.log("Requested amount in wei:", usdcAmount.toString());
+        
         // Check if balance is sufficient
         if (balance.lt(usdcAmount)) {
           const formattedBalance = ethers.utils.formatUnits(balance, 6);
+          console.log("Formatted balance:", formattedBalance, "USDC");
           throw new Error(`Saldo insuficiente. Tu saldo actual es: ${formattedBalance} USDC`);
         }
 
