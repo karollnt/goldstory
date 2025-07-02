@@ -179,7 +179,7 @@
             throw new Error(result.message || 'Error al procesar el swap en el servidor');
           }
 
-          alert("Inversión enviada y procesada exitosamente. " + (result.message || ''));
+          alert("Inversión enviada y procesada exitosamente. Puede tardar un poco en verse reflejado en tu cartera. " + (result.message || ''));
         } catch (backendError) {
           console.error("Error al notificar al servidor:", backendError);
           // Still show success for the transfer, but warn about backend notification
