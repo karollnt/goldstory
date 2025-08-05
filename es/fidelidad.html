@@ -270,3 +270,26 @@ console.log("Proceso completado: GS enviados al cliente.");
 }
 
 module.exports = { processIncomingPayment };
+<script>
+  window.onload = function () {
+    if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+      document.getElementById("uniswap-iframe").style.display = "none";
+      document.getElementById("uniswap-mobile-link").style.display = "block";
+    }
+  };
+</script>
+
+<!-- IF Desktop -->
+<iframe id="uniswap-iframe"
+  src="https://app.uniswap.org/#/swap?inputCurrency=USDC&outputCurrency=0x9c2cd31784ffd13350058ac199f884bb166ce41c&chain=polygon"
+  height="660px" width="342px" style="border: 0;" allowfullscreen
+  sandbox="allow-scripts allow-same-origin allow-popups">
+</iframe>
+
+<!-- IF Mobile -->
+<div id="uniswap-mobile-link" style="display: none;">
+  <p><strong>Mobile user?</strong> Click the button below and open it in your MetaMask app browser.</p>
+  <a class="button button-primary"
+    href="https://app.uniswap.org/#/swap?inputCurrency=USDC&outputCurrency=0x9c2cd31784ffd13350058ac199f884bb166ce41c&chain=polygon"
+    target="_blank">Open in Uniswap</a>
+</div>
