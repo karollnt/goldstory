@@ -1,6 +1,8 @@
 function isMobileDevice() {
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-         (window.innerWidth <= 768);
+  return (
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+    window.innerWidth <= 768
+  );
 }
 
 const sdkOptions = {
@@ -27,15 +29,17 @@ async function connectWallet() {
     document.getElementById('connectBtn').disabled = true;
 
     if (isMobileDevice() && !window.ethereum) {
-      const dappUrl = encodeURIComponent(window.location.href);
-      const deepLink = `https://metamask.app.link/dapp/${dappUrl}`;
-      
-      document.getElementById('status').textContent = 'Redirecting to MetaMask mobile app...';
-      
+      const USDC_ADDRESS = '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174';
+      const GS_ADDRESS = '0x9c2cd31784ffd13350058ac199f884bb166ce41c';
+      const uniswapUrl = `app.uniswap.org/#/swap?inputCurrency=${USDC_ADDRESS}&outputCurrency=${GS_ADDRESS}&chain=polygon`;
+      const deepLink = `https://metamask.app.link/dapp/${uniswapUrl}`;
+
+      document.getElementById('status').textContent = 'Opening Uniswap in MetaMask mobile app...';
+
       setTimeout(() => {
         window.location.href = deepLink;
-      }, 1000);
-      
+      }, 500);
+
       return;
     }
 
@@ -69,7 +73,7 @@ async function disconnectWallet() {
     if (provider && provider.disconnect) {
       await provider.disconnect();
     }
-    
+
     document.getElementById('status').textContent = 'Not connected to MetaMask';
     document.getElementById('connectBtn').style.display = 'block';
     document.getElementById('disconnectBtn').style.display = 'none';
@@ -85,7 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const statusElement = document.getElementById('status');
   const connectBtn = document.getElementById('connectBtn');
-  
+
   if (isMobileDevice() && !window.ethereum) {
     statusElement.textContent = 'Ready to connect via MetaMask mobile app';
     connectBtn.textContent = 'Open MetaMask App';
@@ -97,9 +101,10 @@ document.addEventListener('DOMContentLoaded', () => {
   if (provider) {
     provider.on('accountsChanged', (accounts) => {
       if (accounts.length === 0) {
-        statusElement.textContent = isMobileDevice() && !window.ethereum ? 
-          'Ready to connect via MetaMask mobile app' : 
-          'Not connected to MetaMask';
+        statusElement.textContent =
+          isMobileDevice() && !window.ethereum
+            ? 'Ready to connect via MetaMask mobile app'
+            : 'Not connected to MetaMask';
         document.getElementById('connectBtn').style.display = 'block';
         document.getElementById('disconnectBtn').style.display = 'none';
       } else {
