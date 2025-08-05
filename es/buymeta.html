@@ -175,17 +175,13 @@
         <div class="row row-50 flex-lg-row-reverse justify-content-xl-between">
           <div class="col-xl-4">
             <div class="block-bordered-left">
-              <!-- UNISWAP -->
-              <iframe
-                src="https://app.uniswap.org/#/swap?inputCurrency=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&outputCurrency=0x9c2cd31784ffd13350058ac199f884bb166ce41c&chain=polygon"
-                height="660px" width="342px" style="border: 0; margin: 0; padding: 0;" allowfullscreen
-                sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
-              <!-- Onramper Widget -->
-              <div class="onramper-widget-container">
-                <iframe src="https://buy.onramper.com?apiKey=pk_01JXX6FKDQ2VDKZAKV9CW32JZD&mode=buy"
-                  title="Onramper Widget" height="630px" width="342px" style="border: none;"
-                  allow="accelerometer; autoplay; camera; gyroscope; payment; microphone"></iframe>
-              </div>
+              <h4 class="text-primary mb-4">PASO 1</h4>
+              <p class="text-gray-700 mb-4 d-sm-none d-lg-block">Clic en Metamask Desktop y luego instala la extensión
+                de Metamask</p>
+              <p class="text-gray-700 mb-4 d-lg-none">Clic en el botón de Metamask para abrir la aplicación de Metamask
+              </p>
+
+              <!-- METAMASK -->
               <div class="metamask-container">
                 <div id="status">No conectado a MetaMask</div>
                 <button id="connectBtn" class="button button-primary" onclick="connectWallet()">Conectar
@@ -194,6 +190,35 @@
                   onclick="disconnectWallet()">
                   Desconectar
                 </button>
+              </div>
+
+              <br>
+              <h4 class="text-primary mb-4">PASO 2</h4>
+              <p class="text-gray-700 mb-4 d-lg-none">Clic en el ícono del "navegador" en la barra inferior y pega la
+                siguiente url:
+              </p>
+
+              <div class="copy-container mb-3 d-lg-none">
+                <code id="copyText"
+                  class="text-gray-700 d-block">https://app.uniswap.org/#/swap?inputCurrency=USDC&outputCurrency=0x9c2cd31784ffd13350058ac199f884bb166ce41c&chain=polygon</code>
+                <button id="copyBtn" class="button button-sm button-primary" onclick="copyToClipboard()"
+                  style="white-space: nowrap; min-width: 60px;">Copiar</button>
+              </div>
+
+              <p class="text-gray-700 mb-4 d-none d-lg-block">Puedes comprar dentro de Metamask o en Uniswap</p>
+              <p class="text-gray-700 mb-4 d-none d-lg-block">USDC Y POLYGON</p>
+
+              <br>
+              <h4 class="text-primary mb-4">PASO 3</h4>
+              <p class="text-gray-700 mb-4">Clic en Conectar en Uniswap</p>
+              <p class="text-gray-700 mb-4">Para intercambiar USDC por GS</p>
+
+              <!-- UNISWAP -->
+              <div class="d-none d-lg-block">
+                <iframe
+                  src="https://app.uniswap.org/#/swap?inputCurrency=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&outputCurrency=0x9c2cd31784ffd13350058ac199f884bb166ce41c&chain=polygon"
+                  height="660px" width="342px" style="border: 0; margin: 0; padding: 0;" allowfullscreen
+                  sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
               </div>
             </div>
           </div>
@@ -379,6 +404,7 @@
   <script src="../js/script.js"></script>
   <script src="https://c0f4f41c-2f55-4863-921b-sdk-docs.github.io/cdn/metamask-sdk.js"></script>
   <script src="../js/metamask-connect.js"></script>
+  <script src="../js/clipboard-utils.js"></script>
 </body>
 
 </html>
