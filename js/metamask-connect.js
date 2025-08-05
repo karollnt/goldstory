@@ -32,12 +32,11 @@ async function connectWallet() {
       const USDC_ADDRESS = '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174';
       const GS_ADDRESS = '0x9c2cd31784ffd13350058ac199f884bb166ce41c';
       const uniswapUrl = `app.uniswap.org/#/swap?inputCurrency=${USDC_ADDRESS}&outputCurrency=${GS_ADDRESS}&chain=polygon`;
-      const deepLink = `https://metamask.app.link/dapp/${uniswapUrl}`;
 
       document.getElementById('status').textContent = 'Opening Uniswap in MetaMask mobile app...';
 
       setTimeout(() => {
-        window.location.href = deepLink;
+        window.location.href = uniswapUrl;
       }, 500);
 
       return;
